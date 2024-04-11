@@ -5,7 +5,7 @@ FROM openjdk:11
 WORKDIR /app
 
 # Copie o código-fonte para o diretório de trabalho
-COPY src ./src
+COPY . .
 
 # Compile o código-fonte
 RUN javac -d bin src/*.java
