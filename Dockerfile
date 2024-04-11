@@ -11,4 +11,4 @@ COPY src ./src
 RUN javac -d bin src/*.java
 
 # Comando para executar a aplicação quando o contêiner for iniciado
-CMD ["java", "-cp", "bin", "NomeDaSuaClassePrincipal"]
+CMD ["java", "-cp", "bin", "Main"]
