@@ -5,10 +5,10 @@ FROM openjdk:11
 WORKDIR /app
 
 # Copie o código-fonte para o diretório de trabalho
-COPY src ./src
+COPY . .
 
 # Compile o código-fonte
 RUN javac -d bin src/*.java
 
 # Comando para executar a aplicação quando o contêiner for iniciado
-CMD ["java", "-cp", "bin", "NomeDaSuaClassePrincipal"]
+CMD ["java", "-cp", "bin", "Main"]
