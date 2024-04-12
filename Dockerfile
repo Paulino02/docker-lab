@@ -5,10 +5,7 @@ FROM openjdk:11
 WORKDIR /app
 
 # Copie o código-fonte para o diretório de trabalho
-COPY . .
-
-# Compile o código-fonte
-RUN javac -d bin src/*.java
+COPY target/vprofile-v2.war /app/vprofile-v2.war
 
 # Comando para executar a aplicação quando o contêiner for iniciado
-CMD ["java", "-cp", "bin", "Main"]
+CMD ["java", "-jar", "vprofile-v2.war"]
