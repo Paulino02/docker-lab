@@ -1,11 +1,22 @@
-# Use uma imagem base que inclui o JDK do Java
-FROM openjdk:11
+# Estágio 1: Construindo a aplicação
+FROM maven:3.8.4 AS builder
 
-# Defina o diretório de trabalho dentro do contêiner
+# Define o diretório de trabalho dentro do contêiner
 WORKDIR /app
 
-# Copie o código-fonte para o diretório de trabalho
-COPY target/vprofile-v2.war /app/vprofile-v2.war
+# Copia o código-fonte para o diretório de trabalho
+COPY . .
 
-# Comando para executar a aplicação quando o contêiner for iniciado
-CMD ["java", "-jar", "vprofile-v2.war"]
+# Executa o comando Maven para construir o pacote da aplicação
+RUN mvn package
+
+# Estágio 2: Preparando para a execução
+FROM tomcat:latest
+
+# Define o diretório de trabalho dentro do contêiner
+WORKDIR /usr/local/tomcat/webapps/
+
+# Copia o arquivo WAR construído no estágio anterior para o diretório webapps do Tomcat
+COPY --from=builder /app/target/vprofile-v2.war .
+
+# Comando para executar a aplicação quando o contêiner for iniciado (não é necessário neste caso, já que o Tomcat iniciará automaticamente a aplicação)
