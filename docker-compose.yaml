@@ -23,7 +23,7 @@ services:
       - RABBITMQ_DEFAULT_PASS=guest
 
   vproapp:
-    image: tpsribeirao/teste-dockerhub
+    image: vprocontainers/vprofileapp
     ports:
       - "8080:8080"
     volumes: 
